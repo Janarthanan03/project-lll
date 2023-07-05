@@ -1,0 +1,35 @@
+create database bookdb;
+CREATE TABLE bookdb.books (
+b_id int,
+title varchar(20),
+year int,
+price int,
+primary key (b_id)
+);
+create table bookdb.authors(
+a_id int,
+name varchar(20),
+age int,
+b_id int,
+primary key (a_id),
+foreign key (b_id) references books(b_id)
+);
+insert into bookdb.books values
+(1,'once upon a time',1998,599),
+(2,'immune system',2000,999),
+(3,'myology',2007,799),
+(4,'cell biology',2015,1199),
+(5,'hormone system',2021,2599);
+insert into bookdb.authors values
+(1,'robert steeve',40,2),
+(2,'bootstrap',35,3),
+(3,'harry',56,5),
+(4,'jack',46,1),
+(5,'marshall',43,4);
+SELECT * FROM bookdb.books;
+SELECT * FROM bookdb.books where title='biochemistry';
+update bookdb.books set price=499 where title='cell biology';
+delete from bookdb.books where title='microbiology';
+select avg(price) from bookdb.books;
+SELECT books.title,authors.name FROM bookdb.books
+join bookdb.authors on bookdb.books.b_id=bookdb.authors.b_id;
